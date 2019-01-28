@@ -1,25 +1,28 @@
 {
-    "name": "simonbackx/slack-php-webhook",
+    "name": "bowphp/slack-webhook",
     "type": "library",
     "description": "Post messages to your Slack channels with this easy to use library.",
     "keywords": ["Slack", "Webhook", "Channels", "Logging", "Message"],
-    "homepage": "https://github.com/SimonBackx/Slack-PHP-Webhook",
+    "homepage": "https://github.com/bowphp/slack-webhook",
     "license": "MIT",
-
     "authors": [
         {
             "name": "Simon Backx",
             "email": "hi@simonbackx.com",
             "homepage": "https://www.simonbackx.com",
             "role": "Developer"
+        },
+        {
+            "name": "Franck DAKIA",
+            "email": "dakiafranck@gmail.com",
+            "homepage": "https://bowphp.github.io",
+            "role": "Developer"
         }
     ],
-
     "support": {
-        "source": "https://github.com/SimonBackx/Slack-PHP-Webhook",
-        "issues": "https://github.com/SimonBackx/Slack-PHP-Webhook/issues"
+        "source": "https://github.com/bowphp/slack-webhook",
+        "issues": "https://github.com/bowphp/slack-webhook/issues"
     },
-
     "autoload": {
         "files": ["slack.php"]
     }
