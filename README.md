@@ -65,7 +65,7 @@ $slack = new Slack($webhook);
 
 // Create a new message
 $message = new SlackMessage;
-$message->text("Hello world!")->on("#general");
+$message->content("Hello world!")->on("#general");
 
 // Send it!
 $slack->send($message);
@@ -78,8 +78,10 @@ $slack->send($message);
 $slack = new Slack($webhook);
 
 // Create a new message
-$message = new SlackMessage($slack);
-$message->content("Hello world!")->on("@simonbackx");
+$message = new SlackMessage;
+$message
+  ->content("Hello world!")
+  ->on("@simonbackx");
 
 // Send it!
 $slack->send($message);
