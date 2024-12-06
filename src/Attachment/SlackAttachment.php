@@ -17,6 +17,7 @@ class SlackAttachment
     private $title_link;
     private $text;
     private $fields;
+    private $markdown_in_fields;
     private $markdown_in;
     private $image_url;
     private $thumb_url;
@@ -29,7 +30,7 @@ class SlackAttachment
     // Actions
     private $actions;
 
-    public public function __construct($fallback)
+    public function __construct($fallback)
     {
         $this->fallback = $fallback;
     }
@@ -41,7 +42,7 @@ class SlackAttachment
      *
      * @return SlackAttachment
      */
-    public public function setColor($color)
+    public function setColor($color)
     {
         $this->color = $color;
 
@@ -306,7 +307,7 @@ class SlackAttachment
         );
     }
 
-    private public function addAction($action)
+    private function addAction($action)
     {
         if (!isset($this->actions)) {
             $this->actions = array($action);

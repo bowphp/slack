@@ -11,16 +11,16 @@ class Slack
      *
      * @var string
      */
-    public $url;
+    private $url;
 
     /**
      * Slack constructor
      *
-     * @param string $webhook_url
+     * @param string $url
      */
-    public function __construct($webhook_url)
+    public function __construct(string $url)
     {
-        $this->url = $webhookUrl;
+        $this->url = $url;
     }
 
     /**

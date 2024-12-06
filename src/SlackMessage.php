@@ -70,7 +70,7 @@ class SlackMessage
     /**
      * Set the message
      *
-     * @param strint $text
+     * @param string $text
      */
     public function content($text)
     {
