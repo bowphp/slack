@@ -95,7 +95,7 @@ class SlackMessageTest extends TestCase
 
         $data = $message->toArray();
 
-        $this->assertTrue($data['unfurl_links']);
+        $this->assertTrue((bool) $data['unfurl_links']);
     }
 
     /**

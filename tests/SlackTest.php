@@ -9,7 +9,12 @@ use PHPUnit\Framework\TestCase;
 
 class SlackTest extends TestCase
 {
-    private string $webhook_url = 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXX';
+    private string $webhook_url;
+
+    protected function setUp(): void
+    {
+        $this->webhook_url = getenv('SLACK_WEBHOOK_URL');
+    }
 
     /**
      * @test
@@ -36,8 +41,6 @@ class SlackTest extends TestCase
      */
     public function it_can_send_simple_message()
     {
-        $this->markTestSkipped('This test requires a valid Slack webhook URL');
-
         $slack = new Slack($this->webhook_url);
         $message = new SlackMessage('Test message');
 
@@ -50,8 +53,6 @@ class SlackTest extends TestCase
      */
     public function it_can_send_message_with_attachments()
     {
-        $this->markTestSkipped('This test requires a valid Slack webhook URL');
-
         $slack = new Slack($this->webhook_url);
         $message = new SlackMessage('Test message with attachment');
 
@@ -73,8 +74,6 @@ class SlackTest extends TestCase
      */
     public function it_can_send_formatted_message()
     {
-        $this->markTestSkipped('This test requires a valid Slack webhook URL');
-
         $slack = new Slack($this->webhook_url);
         $message = (new SlackMessage('Test formatted message'))
             ->assignTo('test-bot')
@@ -91,7 +90,7 @@ class SlackTest extends TestCase
      */
     public function it_handles_invalid_webhook_url()
     {
-        $slack = new Slack('https://hooks.slack.com/services/INVALID/URL');
+        $slack = new Slack('https://hooks.slack.com/services/NEW/URL/HERE');
         $message = new SlackMessage('Test message');
 
         $result = $slack->send($message);
@@ -103,8 +102,6 @@ class SlackTest extends TestCase
      */
     public function it_can_send_message_with_custom_channel()
     {
-        $this->markTestSkipped('This test requires a valid Slack webhook URL');
-
         $slack = new Slack($this->webhook_url);
         $message = new SlackMessage('Test message');
         $message->on('#random');
@@ -118,8 +115,6 @@ class SlackTest extends TestCase
      */
     public function it_can_send_message_with_custom_username()
     {
-        $this->markTestSkipped('This test requires a valid Slack webhook URL');
-
         $slack = new Slack($this->webhook_url);
         $message = new SlackMessage('Test message');
         $message->assignTo('custom-bot');
@@ -133,8 +128,6 @@ class SlackTest extends TestCase
      */
     public function it_can_send_message_with_emoji()
     {
-        $this->markTestSkipped('This test requires a valid Slack webhook URL');
-
         $slack = new Slack($this->webhook_url);
         $message = new SlackMessage('Test message');
         $message->withEmoji(':tada:');

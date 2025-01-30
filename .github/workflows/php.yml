@@ -1,0 +1,22 @@
+name: slack test
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+    - name: Check code standard
+      run: composer cs-fix
+    - name: Run test suite
+      run: composer test

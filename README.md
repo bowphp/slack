@@ -219,6 +219,14 @@ $message = (new SlackMessage)
 $slack->send($message);
 ```
 
+# Testing
+
+Set the `SLACK_WEBHOOK_URL` variable before
+
+```bash
+composer test
+```
+
 # Warning
 
 Each message initiates a new HTTPS request, which takes some time. Don't send too much messages at once if you are not
