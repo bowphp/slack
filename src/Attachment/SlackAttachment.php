@@ -147,7 +147,7 @@ class SlackAttachment
     public function enableMarkdownFor(string $markdown_in): SlackAttachment
     {
         if (!isset($this->markdown_in_fields)) {
-            $this->markdown_in_fields = (array) $markdown_in;
+            $this->markdown_in_fields = (array)$markdown_in;
 
             return $this;
         }
@@ -309,7 +309,7 @@ class SlackAttachment
      */
     public function addButton(string $text, string $url, string $style = null): SlackAttachment
     {
-        $action = (object)[
+        $action = (object) [
             "type" => "button",
             "text" => $text,
             "url" => $url,
@@ -327,9 +327,10 @@ class SlackAttachment
     private function addAction($action)
     {
         if (!isset($this->actions)) {
-            $this->actions = array($action);
+            $this->actions = [$action];
             return;
         }
+
         $this->actions[] = $action;
     }
 
@@ -406,7 +407,7 @@ class SlackAttachment
         }
 
         if (isset($this->actions)) {
-            $data['actions'] = (array) $this->actions;
+            $data['actions'] = (array)$this->actions;
         }
 
         return $data;

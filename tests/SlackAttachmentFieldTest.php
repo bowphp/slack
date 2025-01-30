@@ -2,8 +2,8 @@
 
 namespace Bow\Slack\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Bow\Slack\Attachment\SlackAttachmentField;
+use PHPUnit\Framework\TestCase;
 
 class SlackAttachmentFieldTest extends TestCase
 {

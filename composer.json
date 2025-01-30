@@ -43,8 +43,20 @@
             "Bow\\Slack\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Bow\\Slack\\Tests\\": "tests/"
+        }
+    },
     "scripts": {
-        "phpcbf": "phpcbf --standard=psr12 --severity=4 --tab-width=4 src tests",
-        "test": "phpunit --configuration phpunit.dist.xml"
-    }
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "cs-fix": "phpcbf --standard=PSR12 src tests",
+        "cs-check": "phpcs --standard=PSR12 src tests"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

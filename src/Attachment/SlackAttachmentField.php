@@ -23,7 +23,7 @@ class SlackAttachmentField
      *
      * @var bool
      */
-    public bool $short;
+    public ?bool $short = null;
 
     /**
      * SlackAttachmentField Constructor
@@ -32,7 +32,7 @@ class SlackAttachmentField
      * @param string $value
      * @param string|null $short
      */
-    public function __construct(string $title, string $value, string $short = null)
+    public function __construct(string $title, string $value, ?string $short = null)
     {
         $this->title = $title;
         $this->value = $value;

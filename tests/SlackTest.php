@@ -2,10 +2,10 @@
 
 namespace Bow\Slack\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Bow\Slack\Attachment\SlackAttachment;
 use Bow\Slack\Slack;
 use Bow\Slack\SlackMessage;
-use Bow\Slack\Attachment\SlackAttachment;
+use PHPUnit\Framework\TestCase;
 
 class SlackTest extends TestCase
 {
@@ -57,10 +57,10 @@ class SlackTest extends TestCase
 
         $attachment = new SlackAttachment('Fallback text');
         $attachment->setText('Attachment content')
-                  ->setColor('good')
-                  ->setTitle('Test Title')
-                  ->addField('Field 1', 'Value 1')
-                  ->addField('Field 2', 'Value 2');
+            ->setColor('good')
+            ->setTitle('Test Title')
+            ->addField('Field 1', 'Value 1')
+            ->addField('Field 2', 'Value 2');
 
         $message->addAttachment($attachment);
 

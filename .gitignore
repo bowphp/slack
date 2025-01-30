@@ -10,3 +10,5 @@ composer.phar
 .vscode-insiders
 *.code-workspace
 .idea/
+.phpunit.result.cache
+phpunit.xml

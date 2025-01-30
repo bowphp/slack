@@ -2,9 +2,9 @@
 
 namespace Bow\Slack\Tests;
 
-use PHPUnit\Framework\TestCase;
-use Bow\Slack\SlackMessage;
 use Bow\Slack\Attachment\SlackAttachment;
+use Bow\Slack\SlackMessage;
+use PHPUnit\Framework\TestCase;
 
 class SlackMessageTest extends TestCase
 {
@@ -129,7 +129,7 @@ class SlackMessageTest extends TestCase
         $attachment2->setText('Text 2');
 
         $message->addAttachment($attachment1)
-                ->addAttachment($attachment2);
+            ->addAttachment($attachment2);
 
         $data = $message->toArray();
 

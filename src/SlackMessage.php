@@ -9,61 +9,61 @@ class SlackMessage
     /**
      * The Message content
      *
-     * @var string
+     * @var ?string
      */
-    private $text;
+    private ?string $text = null;
 
     /**
      * The username in Slack
      *
-     * @var string
+     * @var ?string
      */
-    private $username;
+    private ?string $username = null;
 
     /**
      * The channel
      *
-     * @var string
+     * @var ?string
      */
-    private $channel;
+    private ?string $channel = null;
 
     /**
      * The icon url
      *
-     * @var string
+     * @var ?string
      */
-    private $icon_url;
+    private ?string $icon_url = null;
 
     /**
      * Default icon set in Slack instance
      *
-     * @var string
+     * @var ?string
      */
-    private $icon_emoji;
+    private ?string $icon_emoji = null;
 
     /**
      * The unfurl_links entry
      *
-     * @var string
+     * @var ?bool
      */
-    private $unfurl_links;
+    private ?bool $unfurl_links = null;
 
     /**
      * The SlackAttachment instances
      *
-     * @var array
+     * @var ?array
      */
-    private $attachments;
+    private ?array $attachments = null;
 
     /**
      * SlackMessage constructor
      *
-     * @param string $text
+     * @param string|null $text
+     * @param string|null $channel
      */
-    public function __construct($text = null, $channel = '#general')
+    public function __construct(?string $text = null, ?string $channel = '#general')
     {
         $this->text = $text;
-
         $this->channel = $channel;
     }
 
@@ -71,8 +71,9 @@ class SlackMessage
      * Set the message
      *
      * @param string $text
+     * @return SlackMessage
      */
-    public function content($text)
+    public function content(string $text): SlackMessage
     {
         $this->text = $text;
 
@@ -80,13 +81,12 @@ class SlackMessage
     }
 
     /**
-     * Set user name
+     * Set username
      *
      * @param string $username
-     *
      * @return SlackMessage
      */
-    public function assignTo($username)
+    public function assignTo(string $username): SlackMessage
     {
         $this->username = $username;
 
@@ -97,10 +97,9 @@ class SlackMessage
      * Set the channel
      *
      * @param string $channel
-     *
      * @return SlackMessage
      */
-    public function on($channel)
+    public function on(string $channel): SlackMessage
     {
         $this->channel = $channel;
 
@@ -111,10 +110,9 @@ class SlackMessage
      * Set the emoji
      *
      * @param string $emoji
-     *
      * @return SlackMessage
      */
-    public function withEmoji($emoji)
+    public function withEmoji(string $emoji): SlackMessage
     {
         $this->icon_emoji = $emoji;
 
@@ -125,10 +123,9 @@ class SlackMessage
      * Set icon
      *
      * @param string $url
-     *
      * @return SlackMessage
      */
-    public function withIcon($url)
+    public function withIcon(string $url): SlackMessage
     {
         $this->icon_url = $url;
 
@@ -139,10 +136,9 @@ class SlackMessage
      * Set unfurl_links
      *
      * @param boolean $unfurl_links
-     *
      * @return SlackMessage
      */
-    public function withUnfurlLinks($unfurl_links)
+    public function withUnfurlLinks(bool $unfurl_links): SlackMessage
     {
         $this->unfurl_links = $unfurl_links;
 
@@ -155,7 +151,7 @@ class SlackMessage
      * @param SlackAttachment $attachment
      * @return SlackMessage
      */
-    public function addAttachment(SlackAttachment $attachment)
+    public function addAttachment(SlackAttachment $attachment): SlackMessage
     {
         if (!isset($this->attachments)) {
             $this->attachments = array($attachment);
@@ -173,7 +169,7 @@ class SlackMessage
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'text' => $this->text,

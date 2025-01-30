@@ -2,9 +2,9 @@
 
 namespace Bow\Slack\Tests;
 
-use PHPUnit\Framework\TestCase;
 use Bow\Slack\Attachment\SlackAttachment;
 use Bow\Slack\Attachment\SlackAttachmentField;
+use PHPUnit\Framework\TestCase;
 
 class SlackAttachmentTest extends TestCase
 {
@@ -124,8 +124,8 @@ class SlackAttachmentTest extends TestCase
     {
         $attachment = new SlackAttachment('Fallback message');
         $attachment->setFooterText('Footer text')
-                  ->setFooterIcon('https://example.com/footer-icon.png')
-                  ->setTimestamp(1234567890);
+            ->setFooterIcon('https://example.com/footer-icon.png')
+            ->setTimestamp(1234567890);
 
         $data = $attachment->toArray();
 
@@ -177,11 +177,12 @@ class SlackAttachmentTest extends TestCase
 
         $data = $attachment->toArray();
 
+        $action = $data['actions'][0];
         $this->assertCount(1, $data['actions']);
-        $this->assertEquals('button', $data['actions'][0]['type']);
-        $this->assertEquals('Click me', $data['actions'][0]['text']);
-        $this->assertEquals('https://example.com', $data['actions'][0]['url']);
-        $this->assertEquals('primary', $data['actions'][0]['style']);
+        $this->assertEquals('button', $action->type);
+        $this->assertEquals('Click me', $action->text);
+        $this->assertEquals('https://example.com', $action->url);
+        $this->assertEquals('primary', $action->style);
     }
 
     /**
@@ -191,7 +192,7 @@ class SlackAttachmentTest extends TestCase
     {
         $attachment = new SlackAttachment('Fallback message');
         $attachment->enableMarkdownFor('text')
-                  ->enableMarkdownFor('pretext');
+            ->enableMarkdownFor('pretext');
 
         $data = $attachment->toArray();
 
