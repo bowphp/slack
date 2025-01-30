@@ -153,7 +153,6 @@ class SlackMessage
      * Add Attachment
      *
      * @param SlackAttachment $attachment
-     *
      * @return SlackMessage
      */
     public function addAttachment(SlackAttachment $attachment)

@@ -11,7 +11,7 @@ class Slack
      *
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * Slack constructor
@@ -27,10 +27,9 @@ class Slack
      * Send the message
      *
      * @param SlackMessage $message
-     *
-     * @return boolean
+     * @return bool
      */
-    public function send(SlackMessage $message)
+    public function send(SlackMessage $message): bool
     {
         $data = $message->toArray();
 
@@ -65,10 +64,9 @@ class Slack
      * Set the webhook url
      *
      * @param string $url
-     *
      * @return Slack
      */
-    public function setUrl($url)
+    public function setUrl(string $url): Slack
     {
         $this->url = $url;
 

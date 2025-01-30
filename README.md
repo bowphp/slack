@@ -29,9 +29,9 @@ Add `bowphp/slack-webhook` to your `composer.json` file:
 
 ```json
 {
-  "require": {
-    "bowphp/slack-webhook": "~1.0"
-  }
+    "require": {
+        "bowphp/slack-webhook": "~1.0"
+    }
 }
 ```
 
@@ -89,7 +89,9 @@ $slack->send($message);
 
 ## Overwriting defaults
 
-You can overwrite the defaults on two levels: in a Slack instance (defaults for all messages using this Slack instance) or SlackMessage instances (only for the current message). These methods will not modify your root defaults at Slack.com, but will overwrite them temporary in your code.
+You can overwrite the defaults on two levels: in a Slack instance (defaults for all messages using this Slack instance)
+or SlackMessage instances (only for the current message). These methods will not modify your root defaults at Slack.com,
+but will overwrite them temporary in your code.
 
 ```php
 $slack = new Slack($webhook);
@@ -219,4 +221,5 @@ $slack->send($message);
 
 # Warning
 
-Each message initiates a new HTTPS request, which takes some time. Don't send too much messages at once if you are not running your script in a background task.
+Each message initiates a new HTTPS request, which takes some time. Don't send too much messages at once if you are not
+running your script in a background task.

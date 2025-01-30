@@ -5,32 +5,32 @@ namespace Bow\Slack\Attachment;
 class SlackAttachment
 {
     // Required
-    private $fallback = "";
+    private string $fallback = "";
 
     // Optionals
-    private $color;
-    private $pretext;
-    private $author_name;
-    private $author_icon;
-    private $author_link;
-    private $title;
-    private $title_link;
-    private $text;
-    private $fields;
-    private $markdown_in_fields;
-    private $markdown_in;
-    private $image_url;
-    private $thumb_url;
+    private string $color;
+    private string $pretext;
+    private string $author_name;
+    private string $author_icon;
+    private string $author_link;
+    private string $title;
+    private string $title_link;
+    private string $text;
+    private array $fields;
+    private array $markdown_in_fields = [];
+    private string $markdown_in;
+    private string $image_url;
+    private string $thumb_url;
 
     // Footer
-    private $footer;
-    private $footer_icon;
-    private $ts;
+    private string $footer;
+    private string $footer_icon;
+    private string $ts;
 
     // Actions
-    private $actions;
+    private array $actions = [];
 
-    public function __construct($fallback)
+    public function __construct(string $fallback)
     {
         $this->fallback = $fallback;
     }
@@ -39,10 +39,9 @@ class SlackAttachment
      * Accepted values: "good", "warning", "danger" or any hex color code
      *
      * @param string $color
-     *
      * @return SlackAttachment
      */
-    public function setColor($color)
+    public function setColor(string $color): SlackAttachment
     {
         $this->color = $color;
 
@@ -53,10 +52,9 @@ class SlackAttachment
      * Set the description
      *
      * @param string $text
-     *
      * @return SlackAttachment
      */
-    public function setText($text)
+    public function setText(string $text): SlackAttachment
     {
         $this->text = $text;
 
@@ -67,10 +65,9 @@ class SlackAttachment
      * Optional text that appears above the attachment block
      *
      * @param string $pretext
-     *
      * @return SlackAttachment
      */
-    public function setPretext($pretext)
+    public function setPretext(string $pretext): SlackAttachment
     {
         $this->pretext = $pretext;
 
@@ -81,12 +78,12 @@ class SlackAttachment
      * The author parameters will display a small section at the top of a message attachment.
      *
      * @param string $author_name [description]
-     * @param optional string $author_link A valid URL that will hyperlink the author_name text mentioned above. Set to NULL to ignore this value.
-     * @param optional string $author_icon A valid URL that displays a small 16x16px image to the left of the author_name text. Set to NULL to ignore this value.
+     * @param string|null $author_link A valid URL that will hyperlink the author_name text mentioned above. Set to NULL to ignore this value.
+     * @param string|null $author_icon A valid URL that displays a small 16x16px image to the left of the author_name text. Set to NULL to ignore this value.
      *
      * @return SlackAttachment
      */
-    public function setAuthor($author_name, $author_link = null, $author_icon = null)
+    public function setAuthor(string $author_name, string $author_link = null, string $author_icon = null): SlackAttachment
     {
         $this->setAuthorName($author_name);
 
@@ -105,10 +102,37 @@ class SlackAttachment
      * Set the author name
      *
      * @param string $author_name
+     * @return SlackAttachment
      */
-    public function setAuthorName($author_name)
+    public function setAuthorName(string $author_name): SlackAttachment
     {
         $this->author_name = $author_name;
+
+        return $this;
+    }
+
+    /**
+     * A valid URL that will hyperlink the author_name text mentioned above.
+     *
+     * @param string $author_link
+     * @return SlackAttachment
+     */
+    public function setAuthorLink(string $author_link): SlackAttachment
+    {
+        $this->author_link = $author_link;
+
+        return $this;
+    }
+
+    /**
+     * A valid URL that displays a small 16x16px image to the left of the author_name text.
+     *
+     * @param string $author_icon
+     * @return SlackAttachment
+     */
+    public function setAuthorIcon(string $author_icon): SlackAttachment
+    {
+        $this->author_icon = $author_icon;
 
         return $this;
     }
@@ -118,10 +142,9 @@ class SlackAttachment
      * Setting "fields" will enable markup formatting for the value of each field.
      *
      * @param string $markdown_in description
-     *
      * @return SlackAttachment
      */
-    public function enableMarkdownFor($markdown_in)
+    public function enableMarkdownFor(string $markdown_in): SlackAttachment
     {
         if (!isset($this->markdown_in_fields)) {
             $this->markdown_in_fields = (array) $markdown_in;
@@ -135,43 +158,15 @@ class SlackAttachment
     }
 
     /**
-     * A valid URL that displays a small 16x16px image to the left of the author_name text.
-     *
-     * @param string $author_icon
-     *
-     * @return SlackAttachment
-     */
-    public function setAuthorIcon($author_icon)
-    {
-        $this->author_icon = $author_icon;
-
-        return $this;
-    }
-
-    /**
-     * A valid URL that will hyperlink the author_name text mentioned above.
-     *
-     * @param string $author_link
-     *
-     * @return SlackAttachment
-     */
-    public function setAuthorLink($author_link)
-    {
-        $this->author_link = $author_link;
-
-        return $this;
-    }
-
-    /**
      * The title is displayed as larger, bold text near the top of a message attachment.
      *
      * @param string $title
-     * @param optional string $link By passing a valid URL in the link parameter (optional), the
+     * @param string|null $link By passing a valid URL in the link parameter (optional), the
      * title text will be hyperlinked.
      *
      * @return SlackAttachment
      */
-    public function setTitle($title, $link = null)
+    public function setTitle(string $title, string $link = null): SlackAttachment
     {
         $this->title = $title;
 
@@ -190,10 +185,9 @@ class SlackAttachment
      *   still maintaining the original aspect ratio.
      *
      * @param string $url
-     *
      * @return SlackAttachment
      */
-    public function setImage($url)
+    public function setImage(string $url): SlackAttachment
     {
         $this->image_url = $url;
 
@@ -210,10 +204,9 @@ class SlackAttachment
      * For best results, please use images that are already 75px by 75px.
      *
      * @param string $url HTTP url of the thumbnail
-     *
      * @return SlackAttachment
      */
-    public function setThumbnail($url)
+    public function setThumbnail(string $url): SlackAttachment
     {
         $this->thumb_url = $url;
 
@@ -226,10 +219,9 @@ class SlackAttachment
      *  screen real estate.
      *
      * @param string $text max 300 characters
-     *
      * @return SlackAttachment
      */
-    public function setFooterText($text)
+    public function setFooterText(string $text): SlackAttachment
     {
         $this->footer = $text;
 
@@ -244,10 +236,9 @@ class SlackAttachment
      * sized.
      *
      * @param string $url 16x16 image url
-     *
      * @return SlackAttachment
      */
-    public function setFooterIcon($url)
+    public function setFooterIcon(string $url): SlackAttachment
     {
         $this->footer_icon = $url;
 
@@ -263,10 +254,9 @@ class SlackAttachment
      *
      * Example: Providing 123456789 would result in a rendered timestamp of Nov 29th, 1973.
      * @param int $timestamp Integer value in "epoch time"
-     *
      * @return SlackAttachment
      */
-    public function setTimestamp($timestamp)
+    public function setTimestamp(int $timestamp): SlackAttachment
     {
         $this->ts = $timestamp;
 
@@ -274,13 +264,27 @@ class SlackAttachment
     }
 
     /**
+     * Shortcut without defining SlackAttachmentField
+     *
+     * @param string $title
+     * @param string $value
+     * @param string|null $short
+     * @return SlackAttachment
+     */
+    public function addField(string $title, string $value, string $short = null): SlackAttachment
+    {
+        return $this->addFieldInstance(
+            new SlackAttachmentField($title, $value, $short)
+        );
+    }
+
+    /**
      * Add new attachment field
      *
      * @param SlackAttachmentField $field
-     *
      * @return SlackAttachment
      */
-    public function addFieldInstance(SlackAttachmentField $field)
+    public function addFieldInstance(SlackAttachmentField $field): SlackAttachment
     {
         if (!isset($this->fields)) {
             $this->fields = array($field);
@@ -294,58 +298,46 @@ class SlackAttachment
     }
 
     /**
-     * Shortcut without defining SlackAttachmentField
-     *
-     * @param SlackAttachment $paramname descriptionSlackAttachmentField
-     *
-     * @return SlackAttachment
+     * @param string $text A UTF-8 string label for this button. Be brief but descriptive and
+     * actionable.
+     * @param string $url The fully qualified http or https URL to deliver users to. Invalid URLs
+     * will result in a message posted with the button omitted
+     * @param string|null $style (optional) Setting to primary turns the button green and indicates the
+     * best forward action to take. Providing danger turns the button red and indicates it some kind
+     *  of destructive action. Use sparingly. Be default, buttons will use the UI's default text
+     *  color.
      */
-    public function addField($title, $value, $short = null)
+    public function addButton(string $text, string $url, string $style = null): SlackAttachment
     {
-        return $this->addFieldInstance(
-            new SlackAttachmentField($title, $value, $short)
-        );
+        $action = (object)[
+            "type" => "button",
+            "text" => $text,
+            "url" => $url,
+        ];
+
+        if (isset($style)) {
+            $action->style = $style;
+        }
+
+        $this->addAction($action);
+
+        return $this;
     }
 
     private function addAction($action)
     {
         if (!isset($this->actions)) {
             $this->actions = array($action);
-            return $this;
+            return;
         }
         $this->actions[] = $action;
-        return $this;
     }
 
-    /**
-     * @param string $text  A UTF-8 string label for this button. Be brief but descriptive and
-     * actionable.
-     * @param string $url   The fully qualified http or https URL to deliver users to. Invalid URLs
-     * will result in a message posted with the button omitted
-     * @param string $style  (optional) Setting to primary turns the button green and indicates the
-     * best forward action to take. Providing danger turns the button red and indicates it some kind
-     *  of destructive action. Use sparingly. Be default, buttons will use the UI's default text
-     *  color.
-     */
-    public function addButton($text, $url, $style = null)
+    public function toArray(): array
     {
-        $action = (object) [
-            "type" => "button",
-            "text" => $text,
-            "url" => $url,
-        ];
-        if (isset($style)) {
-            $action->style = $style;
-        }
-        $this->addAction($action);
-        return $this;
-    }
-
-    public function toArray()
-    {
-        $data = array(
+        $data = [
             'fallback' => $this->fallback,
-        );
+        ];
 
         if (isset($this->color)) {
             $data['color'] = $this->color;
@@ -384,7 +376,7 @@ class SlackAttachment
         }
 
         if (isset($this->fields)) {
-            $fields = array();
+            $fields = [];
 
             foreach ($this->fields as $field) {
                 $fields[] = $field->toArray();

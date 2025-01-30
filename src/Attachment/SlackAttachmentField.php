@@ -9,30 +9,30 @@ class SlackAttachmentField
      *
      * @var string
      */
-    public $title;
+    public string $title;
 
     /**
      * The file value
      *
      * @var string
      */
-    public $value;
+    public string $value;
 
     /**
      * Short
      *
-     * @param boolean
+     * @var bool
      */
-    public $short;
+    public bool $short;
 
     /**
      * SlackAttachmentField Constructor
      *
      * @param string $title
      * @param string $value
-     * @param string $short
+     * @param string|null $short
      */
-    public function __construct($title, $value, $short = null)
+    public function __construct(string $title, string $value, string $short = null)
     {
         $this->title = $title;
         $this->value = $value;
@@ -42,11 +42,10 @@ class SlackAttachmentField
     /**
      * Set the Short
      *
-     * @param boolean $short
-     *
+     * @param bool $short
      * @return SlackAttachmentField
      */
-    public function setShort($short)
+    public function setShort(bool $short): SlackAttachmentField
     {
         $this->short = $short;
 
@@ -58,7 +57,7 @@ class SlackAttachmentField
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'title' => $this->title,
