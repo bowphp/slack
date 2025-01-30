@@ -19,4 +19,4 @@ jobs:
     - name: Check code standard
       run: composer cs-fix
     - name: Run test suite
-      run: composer test
+      run: cp phpunit.dist.xml phpunit.xml && composer test
